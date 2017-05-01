@@ -135,6 +135,7 @@ public class SuperHeroDetailActivityTests {
         onView(withText(superHero.getDescription())).check(matches(isDisplayed()));
     }
 
+    // Test 7
     @Test
     public void showsNotFoundErrorWhenSuperHeroIsNotFound() throws Exception {
         String heroName= givenAnUnexistingHeroID();
