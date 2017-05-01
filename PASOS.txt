@@ -1,0 +1,70 @@
+/*** EJERCICIO ***/
+
+Queremos hacer tests de UI con Espresso. Con este tipo de tests, los coverages suelen ser muy altos
+por lo que hay que tener precaución con los porcentajes altos porque pueden ser erróneos.
+
+
+/*** PASOS ***/
+
+1) Forkeamos el proyecto desde https://github.com/Karumi/KataSuperHeroesAndroid y nos vamos a la
+rama de kata-super-heroes
+
+2) Opcionalmente añadimos el repositorio a TravisCI para la integración contínua. El checkstyle del
+archivo de travis.yml lo sustituimos por el de este proyecto (el checkstyle que viene por defecto
+son los estilos de Karumi y hay que quitarlo)
+
+
+/*** PREVIO TESTS ***/
+
+Identificación de posibles tests a partir de la vista que vemos en la app una vez abierta:
+
+1) Lista vacía
+2) Lista entera
+3) Lista con la "A" de Avengers
+4) Lista con foto
+5) Lista con nombre
+6) Click hacia detalles
+7) Rotar tlf
+9) Si progressbar se oculta o no
+
+NOTA: El tema de imágenes dejarlo de lado. Las partes asíncronas son difíciles de probar. PARA
+HABILITAR EL COVERAGE DE ESTOS TESTS DE INSTRUMENTACIÓN, ir al build.gradle y dentro de buildTypes
+añadir:
+
+buildTypes {
+    ...
+    ...
+    debug {
+      testCoverageEnabled = true
+    }
+}
+
+Y ejecutar la tarea de ./gradlew createDebugCoverageReport
+
+/*** TESTS ***/
+
+PREVIO) Crear una método que devuelva un número X de superhéroes. Crear una excepción si no se encuentra
+un superhéroe
+
+<-- TESTS MAIN ACTIVITY -->
+
+1) Si hay superhéroes al abrir la app NO se muestra el empty case. El modo de implementarlo sería:
+    - Si no hay superhéroes (Given)
+    - Al abrir la app (When)
+    - No se muestra el empty case (Then)
+
+2) Si hay 1 superhéroe cuando se abre la app se muestra su nombre
+
+3) Si hay 10 superhéroes cuando se abre la app muestra los nombres (usar RecyclerViewInteraction al
+tener que desplazarse por el RecyclerView)
+
+4) Si hay 10 superhéroes comprobar que los que son Avengers muestran su icono con la "A"
+
+5) Probar que NO muestra el progressbar cuando hay datos
+
+6) Si creamos 15 superhéroes que el total del RecyclerView sean 15
+
+7) Si hay 10 superhéroes que no se muestre el texto con el empty case
+
+8) Navegación de la lista hacia el detalle. Usaremos "intended" para simular un Intent (también nos
+vale para ver si lleva los argumentos)
