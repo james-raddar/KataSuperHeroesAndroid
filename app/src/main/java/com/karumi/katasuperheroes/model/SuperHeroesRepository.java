@@ -16,6 +16,8 @@
 
 package com.karumi.katasuperheroes.model;
 
+import com.karumi.katasuperheroes.model.error.HeroNotFoundException;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,7 +36,7 @@ public class SuperHeroesRepository {
     return superHeroes;
   }
 
-  public SuperHero getByName(String name) {
+  public SuperHero getByName(String name) throws HeroNotFoundException {
     waitABit();
 
     SuperHero result = null;

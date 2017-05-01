@@ -20,6 +20,9 @@ import android.os.Handler;
 import android.os.Looper;
 import com.karumi.katasuperheroes.model.SuperHero;
 import com.karumi.katasuperheroes.model.SuperHeroesRepository;
+import com.karumi.katasuperheroes.model.error.HeroLoadError;
+import com.karumi.katasuperheroes.model.error.HeroNotFoundException;
+
 import javax.inject.Inject;
 
 public class GetSuperHeroByName {
@@ -39,16 +42,27 @@ public class GetSuperHeroByName {
   }
 
   private void loadSuperHeroByName(String name, final Callback callback) {
-    final SuperHero superHero = repository.getByName(name);
-    new Handler(Looper.getMainLooper()).post(new Runnable() {
-      @Override public void run() {
-        callback.onSuperHeroLoaded(superHero);
+      try {
+        final SuperHero superHero = repository.getByName(name);
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                callback.onSuperHeroLoaded(superHero);
+            }
+          });
+      } catch (HeroNotFoundException exception) {
+          new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                callback.onSuperHeroLoadFailed(HeroLoadError.NOT_FOUND);
+            }
+          });
       }
-    });
   }
 
   public interface Callback {
 
     void onSuperHeroLoaded(SuperHero superHero);
+    void onSuperHeroLoadFailed(HeroLoadError error);
   }
 }

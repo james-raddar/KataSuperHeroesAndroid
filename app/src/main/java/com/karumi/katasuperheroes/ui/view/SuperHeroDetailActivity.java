@@ -40,6 +40,7 @@ public class SuperHeroDetailActivity extends BaseActivity implements SuperHeroDe
   @Bind(R.id.tv_super_hero_name) TextView superHeroNameTextView;
   @Bind(R.id.tv_super_hero_description) TextView superHeroDescriptionTextView;
   @Bind(R.id.iv_avengers_badge) View avengersBadgeView;
+  @Bind(R.id.tv_error) TextView errorView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -85,5 +86,11 @@ public class SuperHeroDetailActivity extends BaseActivity implements SuperHeroDe
 
   private String getSuperHeroName() {
     return getIntent().getExtras().getString(SUPER_HERO_NAME_KEY);
+  }
+
+  @Override
+  public void showNotFoundError() {
+    errorView.setVisibility(View.VISIBLE);
+    errorView.setText("Hero not found");
   }
 }

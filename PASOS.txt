@@ -68,3 +68,29 @@ tener que desplazarse por el RecyclerView)
 
 8) Navegación de la lista hacia el detalle. Usaremos "intended" para simular un Intent (también nos
 vale para ver si lleva los argumentos)
+
+<-- TESTS DETAIL ACTIVITY -->
+
+0) Añadir lo referente a Dagger 2 para la inyección de dependencias. Como hay mucho código de instanciación
+duplicado podemos crear patrones de creación como Mother o Builder.
+
+1) Comprobar que se muestra el título del superhéroe en el toolbar
+
+2) Comprobar que se muestra el nombre y la descripción en el detalle
+
+3) Si es Avenger debe mostrar el icono
+
+4) Si no es Avenger ocultar el icono
+
+5) Ocultar texto de error si se encuentra un superhéroe
+
+6) Comprobar que se muestra la descripción de un superhéroe
+
+* NUEVOS REQUISITOS: Implementar ItemNotFound por si no existe la imagen (por ejemplo si la tenemos cacheada
+pero ya no existe en el servidor). Otro sería devolver el error de que NO tenemos conexión. NO USAR NULL porque
+es la forma fácil. Además, es el servidor el que nos devolvería el error. OTRA FORMA: Sería implementar una clase
+NullSuperHeroe que extienda de SuperHeroe como un objeto que representase el estado de null.
+Usaremos un clase con enumerados para marcar los distintos tipos de error
+
+7) Mostrar error si no se encuentra un superhéroe (Hay que añadir un textview a la vista de detalles e
+implementar la lógica en el código)
